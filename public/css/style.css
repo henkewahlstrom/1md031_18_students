@@ -1,0 +1,84 @@
+@import 'https://fonts.googleapis.com/css?family=Pacifico|Dosis';
+
+body {
+    font-family: "Times New Roman", "Arial" ;
+    font-size: 1.5em;
+}
+#header{
+    color: black;
+    position: absolute;
+    padding-left: 100px;
+    padding-top: 80px;
+    font-size: 64px
+}
+#photo-header {
+    width: 96%;
+    height: 400px;
+    opacity: 0.5;
+    margin: 20px;
+    border-style: double;
+    border-color: black;
+    border-radius: 10% 25%;
+}
+
+ #contact:hover {
+    animation: grow;
+  }
+#contact {
+    background-color: LightGrey;
+    border-style: dashed;
+    padding-left: 30px;
+    margin: 20px;
+}
+
+#gluten {
+    color: green;
+    font-weight: bold;
+}
+#vegan {
+    color: green;
+    font-weight: bold;
+}
+#lactose {
+    color: green;
+    font-weight: bold;
+}
+button:hover{
+  background-color: green;
+  cursor: pointer
+}
+#gender:hover{
+  cursor: pointer
+}
+#payment:hover{
+  cursor: pointer
+}
+tbody {
+    text-align: center;
+    vertical-align: middle;
+}
+#menu{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 33% 33% 33%;
+
+    background-color: black;
+    color: white;
+    border-style: dashed;
+    border-color: white;
+    padding-left: 30px;
+    margin: 20px;
+    margin-bottom: 30px;
+}
+.header-box {
+    grid-column: 1 / span 3;
+    grid-row: 1;
+}
+
+#orderInformation{
+  background-color: darkolivegreen;
+  border-style: dashed;
+  border-color: black;
+  padding-left: 30px;
+  margin: 20px;
+}
