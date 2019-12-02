@@ -1,9 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <script src="/socket.io/socket.io.js" defer></script>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <script src="js/js_script.js" defer></script>
+      <script src="https://vuejs.org/js/vue.js" defer></script>
+      <script src="js/vue_script.js" defer></script>
+      <script type="text/javascript" src="js/menu.js"></script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="/vue/vue.js" defer></script>
+      <link rel="stylesheet" href="css/deli-very.css">
         <title>DELI-VERY</title>
     </head>
     <body>
-        <h1>Hello World!!!</h1>
+      <main id="burgerOrdering">
+        <section id="heading">
+          <section id="header">
+            <h1> Welcome to Burger Place!</h1>
+          </section>
+          <img id="photo-header" src="http://www.pitehavsbad.se/wp-content/themes/phg/lib/timthumb.php?src=http://www.pitehavsbad.se/wp-content/uploads/2018/04/webb7.jpg&w=642&h=360&zc=1&q=75&a=c" >
+        </section>
+
+        <section id="menu">
+          <div class="header-box">
+            <h2> Select Burger: </h2>
+            <p> Please select your choice of burger </p>
+          </div>
+          <div v-for="burger in burgers" v-if="burger.stock > 0">
+
+              <h3>{{burger.name}} </h3>
+              <img :src="burger.image" :alt="burger.name" :title="burger.name" width="300"  >
+              <ul>
+                <template v-if ="burger.gluten">
+                  <li> <span id="gluten">Gluten </span> </li> </template>
+                <template v-if= "burger.lactose">
+                  <li> <span id="lactose">Lactose </span> </li> </template>
+                <li> {{burger.kCal}} </li>
+              </ul> <br>
+              <p>Select {{burger.name}}</p>
+              <input type="checkbox" :id="burger.name" :value="burger.name" v-model="checkedBurgers" required="required">
+
+          </div>
+        </section>
+
+        <section id="contact">
+        <h2> Customers information </h2>
+        <p> This is where you provide necessary information </p>
+        <h3> Delivery information </h3>
+          <form>
+            <p>
+              <label for="Name">Full name</label><br>
+              <input type="text" id="name" name="n" required="required" placeholder="First and last name">
+            </p>
+          </form>
+          <form>
+            <p>
+              <label for="E-Mail"> E_Mail</label><br>
+              <input type="text" id="E-Mail" name="em" required="required" placeholder="E-Mail address">
+            </p>
+          </form>
+          <section id="map">
+            <h1> Click in the map! </h1>
+            <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+            <div class="view-box">
+              <div id="dots" v-on:click="displayOrder">
+                  <div
+                    v-for="(order, key) in orders"
+                    v-bind:style="{ left: order.x + 'px', top: order.y + 'px'}">
+                    T
+                  </div>
+              </div>
+            </div>
+          </section>
+          <form>
+            <p>
+              <label for="Payment method">Payment</label><br>
+              <select id="payment" name="pm">
+                <option>Pay pal</option>
+                <option selected="selected"> Credit card</option>
+                <option>Debit card</option>
+                <option>Checks</option>
+              </select>
+            </p>
+          </form>
+          <form>
+            <p>
+              <label for="Gender">Gender</label><br>
+              <input type="radio" id="gender" name="gn" value="Male" v-model="gender" required="required"> Male<br>
+              <input type="radio" id="gender" name="gn" value="Women" v-model="gender" required="required"> Women<br>
+              <input type="radio" id="gender" name="gn" value="Not provided" checked="checked" v-model="gender" required="required"> Do not wish to provide<br>
+            </p>
+          </form>
+          <button type="submit" id="button" v-on:click="markDone(); addOrder()"><img src="https://vegibit.com/wp-content/uploads/2017/06/How-To-Send-Email-To-New-Users.png" width=30 > Place my order</button>
+        </section>
+
+        <section v-for="info in orderInfo" id="orderInformation">
+          <div id="compOrder">
+            <h4> Your Order: </h4>
+            <p> {{info.checkedBurgers}}
+          </div>
+          <div id="deliveryInfo">
+            <h4> Customer Information </h4>
+            <p> Name: {{info.name}}</p>
+            <p> E-mail: {{info.e_mail}}</p>
+            <p> Payment Method: {{info.payment}}</p>
+            <p> Gender: {{info.gender}}</p>
+
+          </div>
+          <h5> Thank you for visiting Burger Place! </h5>
+        </section>
+
+      </main>
+      <footer>
+        <hr>
+        <p> &copy Burger Place corp
     </body>
 </html>
